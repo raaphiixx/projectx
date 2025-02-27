@@ -32,8 +32,7 @@ public class User implements Serializable {
     )
     private Set<Post> posts = new HashSet<>();
 
-    public User(Long id, String login, String password, String name, String lname) {
-        this.id = id;
+    public User(String login, String password, String name, String lname) {
         this.login = login;
         this.password = password;
         this.name = name;

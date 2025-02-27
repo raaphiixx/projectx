@@ -24,4 +24,13 @@ public class Post implements Serializable {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User owner;
+
+    @OneToMany(mappedBy = "post")
+    private Set<PostLike> likes = new HashSet<>();
+
+
+    public Post(String content, User owner) {
+        this.content = content;
+        this.owner = owner;
+    }
 }

@@ -36,20 +36,20 @@ Some topics will be deleted or change during the process.
 4- Liking and unliking tweets:
 
 * Like a tweet: POST /users/{userId}/likes
-* Get user’ liked tweets: GET /users/{userId}/likes
-* Get tweet’s liking users: GET /tweets/{tweetId}/likes
+* Get user' liked tweets: GET /users/{userId}/likes
+* Get tweet's liking users: GET /tweets/{tweetId}/likes
 * Unlike a tweet: DELETE /users/{userId}/likes/{tweetId}
 
 5- Retweeting and undoing retweets:
 
 * Retweet a tweet: POST /users/{userId}/retweets
-* Get tweet’s retweets: GET /tweets/{tweetId}/retweeters
+* Get tweet's retweets: GET /tweets/{tweetId}/retweeters
 * Undo a retweet: DELETE /users/{userId}/retweets/{tweetId}
 
 6- View Home Timeline and User Timeline.
 
-* Get a single user’s Home timeline: Get /users/{userId}/timelines/home
-* Get a single user’s Tweet timeline: Get /users/{userId}/timelines/tweet
+* Get a single user's Home timeline: Get /users/{userId}/timelines/home
+* Get a single user's Tweet timeline: Get /users/{userId}/timelines/tweet
 
 ### UML Project:
 
@@ -59,3 +59,5 @@ Some topics will be deleted or change during the process.
 ## Project details:
 
 24/02/2025 -> Starting using H2 database, because it's easy to configuration and really powerfull for testing. Each commit will have a message to explain changes between commits.
+
+27/02/2025 -> New entity called PostLike created for store data about who gave a like on each post, and wasn't necessary more fields like date or hour, because for now, those informations aren't necessary. Some changes was made on User and Post enity, removing the ID on constructor, the Spring will take this work.
