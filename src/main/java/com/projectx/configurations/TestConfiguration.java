@@ -1,11 +1,7 @@
 package com.projectx.configurations;
 
-import com.projectx.entites.Post;
-import com.projectx.entites.PostLike;
-import com.projectx.entites.User;
-import com.projectx.repositories.PostLikeRepository;
-import com.projectx.repositories.PostRepository;
-import com.projectx.repositories.UserRepository;
+import com.projectx.entites.*;
+import com.projectx.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +19,12 @@ public class TestConfiguration implements CommandLineRunner {
 
     @Autowired
     private PostLikeRepository postLikeRepository;
+
+    @Autowired
+    private UserFollowRepository userFollowRepository;
+
+    @Autowired
+    private PostRTRepository postRTRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -58,6 +60,19 @@ public class TestConfiguration implements CommandLineRunner {
         PostLike like3 = new PostLike(u3, p7);
 
         postLikeRepository.saveAll(Arrays.asList(like1, like2, like3));
+
+        UserFollow uf1 = new UserFollow(u2, u1);
+        UserFollow uf2 = new UserFollow(u2, u4);
+        UserFollow uf3 = new UserFollow(u2, u3);
+        UserFollow uf4 = new UserFollow(u4, u1);
+
+        userFollowRepository.saveAll(Arrays.asList(uf1, uf2, uf3, uf4));
+
+        PostRT pt1 = new PostRT(p1, u2);
+        PostRT pt2 = new PostRT(p7, u2);
+        PostRT pt3 = new PostRT(p3, u4);
+
+        postRTRepository.saveAll(Arrays.asList(pt1, pt2, pt3));
 
     }
 }

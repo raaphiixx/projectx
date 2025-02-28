@@ -32,6 +32,12 @@ public class User implements Serializable {
     )
     private Set<Post> posts = new HashSet<>();
 
+    @OneToMany(mappedBy = "followed")
+    private Set<UserFollow> followers = new HashSet<>();
+
+    @OneToMany(mappedBy = "follower")
+    private Set<UserFollow> following = new HashSet<>();
+
     public User(String login, String password, String name, String lname) {
         this.login = login;
         this.password = password;

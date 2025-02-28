@@ -53,7 +53,7 @@ Some topics will be deleted or change during the process.
 
 ### UML Project:
 
-![Diagram User - Post](medias/diagram_1.png)
+![Diagram User - Post](medias/diagram_2.png)
 
 
 ## Project details:
@@ -61,3 +61,5 @@ Some topics will be deleted or change during the process.
 24/02/2025 -> Starting using H2 database, because it's easy to configuration and really powerfull for testing. Each commit will have a message to explain changes between commits.
 
 27/02/2025 -> New entity called PostLike created for store data about who gave a like on each post, and wasn't necessary more fields like date or hour, because for now, those informations aren't necessary. Some changes was made on User and Post enity, removing the ID on constructor, the Spring will take this work.
+
+28/02/2025 -> Created a PostRT entity using the same structure from PostLike, UserFollow was create too. Diagram image was change to insert new structure about the project. The first part for now is complet, the next step will be services and controllers.

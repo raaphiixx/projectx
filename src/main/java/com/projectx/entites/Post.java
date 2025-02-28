@@ -28,6 +28,9 @@ public class Post implements Serializable {
     @OneToMany(mappedBy = "post")
     private Set<PostLike> likes = new HashSet<>();
 
+    @OneToMany(mappedBy = "postRT")
+    private Set<PostRT> RT = new HashSet<>();
+
 
     public Post(String content, User owner) {
         this.content = content;
