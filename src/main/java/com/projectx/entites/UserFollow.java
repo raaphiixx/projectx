@@ -19,15 +19,15 @@ public class UserFollow implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "followerId")
-    private User follower;
+    @JoinColumn(name = "followingId")
+    private User following;
 
     @ManyToOne
     @JoinColumn(name = "followedId")
     private User followed;
 
-    public UserFollow(User follower, User followed) {
-        this.follower = follower;
+    public UserFollow(User following, User followed) {
+        this.following = following;
         this.followed = followed;
     }
 }

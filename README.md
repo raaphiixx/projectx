@@ -63,3 +63,5 @@ Some topics will be deleted or change during the process.
 27/02/2025 -> New entity called PostLike created for store data about who gave a like on each post, and wasn't necessary more fields like date or hour, because for now, those informations aren't necessary. Some changes was made on User and Post enity, removing the ID on constructor, the Spring will take this work.
 
 28/02/2025 -> Created a PostRT entity using the same structure from PostLike, UserFollow was create too. Diagram image was change to insert new structure about the project. The first part for now is complet, the next step will be services and controllers.
+
+06/03/2025 -> First service created, for now just for list all Users; Record class used to DTO. In this part i've got some problems to integrate everything, in first time i tried to use a Set Post entity in Record class, but after some reasearch i prefer just create a Set Long and ask for ids, this will be better in performance.
