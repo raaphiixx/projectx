@@ -65,3 +65,5 @@ Some topics will be deleted or change during the process.
 28/02/2025 -> Created a PostRT entity using the same structure from PostLike, UserFollow was create too. Diagram image was change to insert new structure about the project. The first part for now is complet, the next step will be services and controllers.
 
 06/03/2025 -> First service created, for now just for list all Users; Record class used to DTO. In this part i've got some problems to integrate everything, in first time i tried to use a Set Post entity in Record class, but after some reasearch i prefer just create a Set Long and ask for ids, this will be better in performance.
+
+08/03/2025 -> First component created, Post and User convert DTO inside a class to organize the application. This part was really complicated, because i didn't know how insert PostRT and Likes to convert, after some tries i got it. Now it's possible to list all Users and Posts. The next step is adding some filters, like search by id or name.
