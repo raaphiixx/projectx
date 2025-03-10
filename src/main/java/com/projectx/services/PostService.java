@@ -2,6 +2,8 @@ package com.projectx.services;
 
 import com.projectx.components.ConvertDTO;
 import com.projectx.dto.PostDTO;
+import com.projectx.entites.Post;
+import com.projectx.exceptions.PostNotFoundException;
 import com.projectx.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,11 @@ public class PostService {
 
     public List<PostDTO> findAll() {
         return postRepository.findAll().stream().map(convertDTO::convertPostDTO).collect(Collectors.toList());
+    }
+
+    public PostDTO findById(Long id) throws PostNotFoundException {
+        Post result = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+        return convertDTO.convertPostDTO(result);
     }
 
 }

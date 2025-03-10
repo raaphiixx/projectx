@@ -2,7 +2,10 @@ package com.projectx.services;
 
 import com.projectx.components.ConvertDTO;
 import com.projectx.dto.UserDTO;
+import com.projectx.entites.User;
+import com.projectx.exceptions.UserNotFoundException;
 import com.projectx.repositories.UserRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,11 @@ public class UserService {
 
     public List<UserDTO> findAll() {
         return userRepository.findAll().stream().map(convertDTO::convertUserDTO).collect(Collectors.toList());
+    }
+
+    public UserDTO findById(Long id) throws UserNotFoundException {
+        User result = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        return convertDTO.convertUserDTO(result);
     }
 
 }
