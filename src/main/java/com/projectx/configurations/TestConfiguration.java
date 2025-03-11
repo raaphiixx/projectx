@@ -29,19 +29,19 @@ public class TestConfiguration implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        User u1 = new User("user1", "123", "User 1", "last 1");
-        User u2 = new User("user2", "123", "User 2", "last 2");
-        User u3 = new User("user3", "123", "User 3", "last 3");
-        User u4 = new User("user4", "123", "User 4", "last 4");
+        User u1 = new User("user1", "123", "User 1", "last 1", "user1@email.com");
+        User u2 = new User("user2", "123", "User 2", "last 2", "user2@email.com");
+        User u3 = new User("user3", "123", "User 3", "last 3", "user3@email.com");
+        User u4 = new User("user4", "123", "User 4", "last 4", "user4@email.com");
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4));
 
         Post p1 = new Post("In elementum purus et lorem auctor.", u1);
         Post p2 = new Post("In molestie ante euismod feugiat aliquet. ", u1);
-        Post p3 = new Post("Quisque in arcu lectus. Integer aliquet.", u2);
+        Post p3 = new Post("Quisque in lorem lectus. Integer aliquet.", u2);
         Post p4 = new Post("Curabitur ut mi ac sem. ", u3);
         Post p5 = new Post("Aliquam sed efficitur ex. Curabitur", u4);
         Post p6 = new Post("Proin erat dui, mattis eget.", u2);
-        Post p7 = new Post("In hac habitasse platea dictumst.", u4);
+        Post p7 = new Post("In hac habitasse lorem dictumst.", u4);
 
         postRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7));
 

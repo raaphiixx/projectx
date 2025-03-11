@@ -30,4 +30,12 @@ public class PostService {
         return convertDTO.convertPostDTO(result);
     }
 
+    public List<PostDTO> findByContentContaining(String text) throws PostNotFoundException {
+        List<Post> result = postRepository.findByContentContainingIgnoreCase(text);
+        if(result.isEmpty()) {
+            throw new PostNotFoundException("Content not found!");
+        }
+        return result.stream().map(convertDTO::convertPostDTO).collect(Collectors.toList());
+    }
+
 }

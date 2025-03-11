@@ -70,12 +70,16 @@ Some topics will be deleted or change during the process.
 
 10/03/2025 -> FindById implemented in both classes; In this part was necessary handler some exceptions and return a "friendly" message for the user, so, two custom exceptions was created (UserNotFoundException and PostNotFoundException), and the package infra are used to handle the error message and controller exceptions.
 
+11/03/2025 -> Email added for user, and new filters implemented, now it is possible to search a post content(isn't necessary all text, just a piece of the text) and search users by email, for this was necessary add a new component, the class URL, to decode text using Http main process.
+
 ## Endpoints
 
 * **User Get**
   * **findAll()** -> http://localhost:8080/users
-  * **findbyId()** -> http://localhost:8080/users/{id}
+  * **findById()** -> http://localhost:8080/users/{id}
+  * **findByEmail()** -> http://localhost:8080/users/emailsearch?text={user@email.com}
 
 * **Post Get**
   * **findAll()** -> http://localhost:8080/users
-  * **findbyId()** -> http://localhost:8080/users/{id}
+  * **findById()** -> http://localhost:8080/users/{id}
+  * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}

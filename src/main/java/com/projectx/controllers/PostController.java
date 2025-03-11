@@ -1,13 +1,11 @@
 package com.projectx.controllers;
 
+import com.projectx.components.URL;
 import com.projectx.dto.PostDTO;
 import com.projectx.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +27,12 @@ public class PostController {
         PostDTO result = postService.findById(id);
         return ResponseEntity.ok().body(result);
     }
+
+    @GetMapping(value = "/contentsearch")
+    public ResponseEntity<List<PostDTO>> findByContentContaining(@RequestParam(value = "text") String text) {
+        text = URL.decodeParam(text);
+        List<PostDTO> list = postService.findByContentContaining(text);
+        return ResponseEntity.ok().body(list);
+    }
+
 }

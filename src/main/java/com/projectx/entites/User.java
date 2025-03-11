@@ -23,6 +23,7 @@ public class User implements Serializable {
     private String password;
     private String name;
     private String lname;
+    private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -38,10 +39,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "followed")
     private Set<UserFollow> followed = new HashSet<>();
 
-    public User(String login, String password, String name, String lname) {
+    public User(String login, String password, String name, String lname, String email) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.lname = lname;
+        this.email = email;
     }
 }
