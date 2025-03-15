@@ -1,6 +1,7 @@
 package com.projectx.components;
 
 import com.projectx.dto.PostDTO;
+import com.projectx.dto.RegisterDTO;
 import com.projectx.dto.UserDTO;
 import com.projectx.entites.Post;
 import com.projectx.entites.User;
@@ -18,6 +19,11 @@ public class ConvertDTO {
                 user.getFollowing().stream().map(userFollow -> userFollow.getFollowed().getId()).collect(Collectors.toSet());
 
         return new UserDTO(user.getName(), user.getLname(), postIds, followedIds);
+    }
+
+    public RegisterDTO convertRegisterDTO(User user) {
+        return new RegisterDTO(user.getName(), user.getLname(), user.getLogin(),
+                user.getPassword(), user.getEmail());
     }
 
     public PostDTO convertPostDTO(Post post) {

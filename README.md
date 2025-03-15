@@ -72,6 +72,8 @@ Some topics will be deleted or change during the process.
 
 11/03/2025 -> Email added for user, and new filters implemented, now it is possible to search a post content(isn't necessary all text, just a piece of the text) and search users by email, for this was necessary add a new component, the class URL, to decode text using Http main process.
 
+15/03/2025 -> Authentication process, that was really complicated... At the first part, all process was inside AUthenticationController class, but it was a mess, controller consulting Entity without DTO, AuthenticationService and more. After a few days, and testing every day i found the solution and organize better the code. Now it's possible register new user and default role is USER, and login, returning a token to authenticate other requests.
+
 ## Endpoints
 
 * **User Get**
@@ -83,3 +85,7 @@ Some topics will be deleted or change during the process.
   * **findAll()** -> http://localhost:8080/users
   * **findById()** -> http://localhost:8080/users/{id}
   * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
+
+* **Authentication**
+* **register()** -> http://localhost:8080/auth/register
+* **login()** -> http://localhost:8080/auth/login
