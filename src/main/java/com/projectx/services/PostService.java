@@ -3,8 +3,12 @@ package com.projectx.services;
 import com.projectx.components.ConvertDTO;
 import com.projectx.dto.PostDTO;
 import com.projectx.entites.Post;
+import com.projectx.entites.User;
+import com.projectx.exceptions.PostNotCreatedException;
 import com.projectx.exceptions.PostNotFoundException;
+import com.projectx.exceptions.UserNotFoundException;
 import com.projectx.repositories.PostRepository;
+import com.projectx.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,9 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ConvertDTO convertDTO;
@@ -38,4 +45,17 @@ public class PostService {
         return result.stream().map(convertDTO::convertPostDTO).collect(Collectors.toList());
     }
 
+    public PostDTO insert(PostDTO postDTO) throws PostNotCreatedException {
+         User owner = userRepository.findById(postDTO.userId()).orElseThrow(UserNotFoundException::new);
+
+         if(owner != null) {
+            Post newPost = new Post();
+            newPost.setContent(postDTO.content());
+            newPost.setOwner(owner);
+            postRepository.save(newPost);
+            return convertDTO.convertPostDTO(newPost);
+         } else {
+             throw new PostNotCreatedException();
+         }
+    }
 }

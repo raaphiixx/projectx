@@ -6,7 +6,9 @@ import com.projectx.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -33,6 +35,14 @@ public class PostController {
         text = URL.decodeParam(text);
         List<PostDTO> list = postService.findByContentContaining(text);
         return ResponseEntity.ok().body(list);
+    }
+
+    @PostMapping(value = "/insert")
+    public ResponseEntity insert(@RequestBody PostDTO postDTO) {
+        PostDTO savePost = postService.insert(postDTO);
+        URI uri =
+                ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{login}").buildAndExpand(savePost).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 }
