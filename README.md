@@ -74,6 +74,8 @@ Some topics will be deleted or change during the process.
 
 15/03/2025 -> Authentication process, that was really complicated... At the first part, all process was inside AUthenticationController class, but it was a mess, controller consulting Entity without DTO, AuthenticationService and more. After a few days, and testing every day i found the solution and organize better the code. Now it's possible register new user and default role is USER, and login, returning a token to authenticate other requests.
 
+21/03/2025 -> Created a method to insert new posts, that part was "easy", but for a few days, i forgot a little part POST NEEDS A OWNER, so every test i made return a NullPointerException, and i didn't understand why, so after think about i remember this little problem. This part will be commit in another day, because i forgot to write before push my last commit.
+
 ## Endpoints
 
 * **User Get**
