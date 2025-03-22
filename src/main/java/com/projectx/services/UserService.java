@@ -3,9 +3,14 @@ package com.projectx.services;
 import com.projectx.components.ConvertDTO;
 import com.projectx.dto.UserDTO;
 import com.projectx.entites.User;
+import com.projectx.exceptions.UserNotAuthorizationException;
 import com.projectx.exceptions.UserNotFoundException;
 import com.projectx.repositories.UserRepository;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +42,29 @@ public class UserService {
             throw new UserNotFoundException("Email not found!");
         }
         return result.stream().map(convertDTO::convertUserDTO).collect(Collectors.toSet());
+    }
+
+    public UserDTO update(UserDTO data) throws BadRequestException {
+        Long authenticateUserId = getAuthenticationUserId();
+
+        User userUpdate =
+                userRepository.findById(authenticateUserId).orElseThrow(UserNotFoundException::new);
+        userUpdate.setName(data.name());
+        userUpdate.setLname(data.lname());
+
+        userRepository.save(userUpdate);
+        return convertDTO.convertUserDTO(userUpdate);
+    }
+
+    private Long getAuthenticationUserId() throws UserNotAuthorizationException {
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return ((User) userDetails).getId();
+        } else {
+            throw new UserNotAuthorizationException();
+        }
     }
 
 }
