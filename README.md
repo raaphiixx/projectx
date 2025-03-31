@@ -76,18 +76,26 @@ Some topics will be deleted or change during the process.
 
 21/03/2025 -> Created a method to insert new posts, that part was "easy", but for a few days, i forgot a little part POST NEEDS A OWNER, so every test i made return a NullPointerException, and i didn't understand why, so after think about i remember this little problem. This part will be commit in another day, because i forgot to write before push my last commit.
 
+31/03/2025 -> In this moment was add delete method, but for that is necessary insert the correct token, username and password, if the username or password was incorrect a exception is launched UserNotDeletedException, if all information was correct, the user receive a message informing the success about the operation. For delete a user, the endpoint is the same for findAll(), but is necessary change the method to **DELETE**.
+
 ## Endpoints
 
-* **User Get**
-  * **findAll()** -> http://localhost:8080/users
-  * **findById()** -> http://localhost:8080/users/{id}
-  * **findByEmail()** -> http://localhost:8080/users/emailsearch?text={user@email.com}
+* **User**
+  * **GET** 
+    * **findAll()** -> http://localhost:8080/users
+    * **findById()** -> http://localhost:8080/users/{id}
+    * **findByEmail()** -> http://localhost:8080/users/emailsearch?text={user@email.com}
+  * **DELETE**
+    * **delete()** -> http://localhost:8080/users
 
-* **Post Get**
-  * **findAll()** -> http://localhost:8080/users
-  * **findById()** -> http://localhost:8080/users/{id}
-  * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
+* **Post**
+  * **GET** 
+    * **findAll()** -> http://localhost:8080/users
+    * **findById()** -> http://localhost:8080/users/{id}
+    * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
+  * **POST**
+    * **insert()** -> http://localhost:8080/posts/insert
 
 * **Authentication**
-* **register()** -> http://localhost:8080/auth/register
-* **login()** -> http://localhost:8080/auth/login
+  * **register()** -> http://localhost:8080/auth/register
+  * **login()** -> http://localhost:8080/auth/login

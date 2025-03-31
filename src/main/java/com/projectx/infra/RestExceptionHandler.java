@@ -1,6 +1,7 @@
 package com.projectx.infra;
 
 import com.projectx.exceptions.PostNotFoundException;
+import com.projectx.exceptions.UserNotDeletedException;
 import com.projectx.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         RestErrorMessage message = new RestErrorMessage(Instant.now(), HttpStatus.NOT_FOUND.value(),
                 exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
+
+    @ExceptionHandler(UserNotDeletedException.class)
+    private ResponseEntity<RestErrorMessage> userNotDeletedHandler(UserNotDeletedException exception) {
+        RestErrorMessage message = new RestErrorMessage(Instant.now(),
+                HttpStatus.UNAUTHORIZED.value(), exception.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
     }
 }

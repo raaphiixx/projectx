@@ -1,14 +1,16 @@
 package com.projectx.controllers;
 
 import com.projectx.components.URL;
+import com.projectx.dto.AuthenticationDTO;
+import com.projectx.dto.SuccessResponseDTO;
 import com.projectx.dto.UserDTO;
-import com.projectx.exceptions.UserNotAuthorizationException;
+import com.projectx.exceptions.UserNotDeletedException;
 import com.projectx.services.UserService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -49,5 +51,16 @@ public class UserController {
         URI uri =
                 ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{login}").buildAndExpand(userUpdate).toUri();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity delete(@RequestBody @Validated AuthenticationDTO data) throws UserNotDeletedException {
+        Boolean deleted = userService.delete(data);
+        if(deleted) {
+            SuccessResponseDTO message = new SuccessResponseDTO("User deleted successfully");
+            return ResponseEntity.ok(message);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Delete Failed");
+        }
     }
 }

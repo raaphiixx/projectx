@@ -1,9 +1,11 @@
 package com.projectx.services;
 
 import com.projectx.components.ConvertDTO;
+import com.projectx.dto.AuthenticationDTO;
 import com.projectx.dto.UserDTO;
 import com.projectx.entites.User;
 import com.projectx.exceptions.UserNotAuthorizationException;
+import com.projectx.exceptions.UserNotDeletedException;
 import com.projectx.exceptions.UserNotFoundException;
 import com.projectx.repositories.UserRepository;
 import org.apache.coyote.BadRequestException;
@@ -25,6 +27,9 @@ public class UserService {
 
     @Autowired
     private ConvertDTO convertDTO;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
 
     public List<UserDTO> findAll() {
@@ -54,6 +59,23 @@ public class UserService {
 
         userRepository.save(userUpdate);
         return convertDTO.convertUserDTO(userUpdate);
+    }
+
+    public Boolean delete(AuthenticationDTO data) throws UserNotDeletedException {
+
+        Boolean checkInfo = authenticationService.checkInfo(data);
+
+        Long authenticateUserId = getAuthenticationUserId();
+
+        User userDelete =
+                userRepository.findById(authenticateUserId).orElseThrow(UserNotFoundException::new);
+
+        if(!checkInfo) {
+            throw new UserNotDeletedException();
+        } else {
+            userRepository.delete(userDelete);
+            return true;
+        }
     }
 
     private Long getAuthenticationUserId() throws UserNotAuthorizationException {

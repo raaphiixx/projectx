@@ -39,6 +39,15 @@ public class AuthenticationService {
         return tokenService.generateToken(userConverter);
     }
 
+    public Boolean checkInfo(AuthenticationDTO authenticationDTO) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.login(),
+                authenticationDTO.password());
+
+        var auth = authenticationManager.authenticate(usernamePassword);
+
+        return auth.isAuthenticated();
+    }
+
     public RegisterDTO register(RegisterDTO registerDTO) {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(registerDTO.password());
