@@ -1,6 +1,7 @@
 package com.projectx.services;
 
 import com.projectx.components.ConvertDTO;
+import com.projectx.dto.AuthenticationDTO;
 import com.projectx.dto.PostDTO;
 import com.projectx.entites.Post;
 import com.projectx.entites.User;
@@ -27,6 +28,9 @@ public class PostService {
 
     @Autowired
     private ConvertDTO convertDTO;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     public List<PostDTO> findAll() {
         return postRepository.findAll().stream().map(convertDTO::convertPostDTO).collect(Collectors.toList());
@@ -57,5 +61,22 @@ public class PostService {
          } else {
              throw new PostNotCreatedException();
          }
+    }
+
+    public Boolean delete(AuthenticationDTO data, Long postId) {
+        Boolean checkinfo = authenticationService.checkInfo(data);
+        System.out.println("POST ID: " + postId);
+
+        Post postSearch = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+
+        User userSearch = (User) userRepository.findByLogin(data.login());
+        System.out.println("USER ID: " + userSearch.getId());
+
+        if (!postSearch.getOwner().getId().equals(userSearch.getId())) {
+            throw new UserNotFoundException();
+        }
+        postRepository.delete(postSearch);
+
+        return true;
     }
 }

@@ -1,10 +1,14 @@
 package com.projectx.controllers;
 
 import com.projectx.components.URL;
+import com.projectx.dto.AuthenticationDTO;
 import com.projectx.dto.PostDTO;
+import com.projectx.dto.SuccessResponseDTO;
 import com.projectx.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,6 +47,18 @@ public class PostController {
         URI uri =
                 ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{login}").buildAndExpand(savePost).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity delete(@RequestBody @Validated AuthenticationDTO data,
+                                 @PathVariable ("postId") Long postId) {
+        Boolean deleted = postService.delete(data, postId);
+        if(deleted) {
+            SuccessResponseDTO message = new SuccessResponseDTO("Post deleted successfully");
+            return ResponseEntity.ok(message);
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Delete Failed");
+        }
     }
 
 }

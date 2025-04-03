@@ -78,6 +78,8 @@ Some topics will be deleted or change during the process.
 
 31/03/2025 -> In this moment was add delete method, but for that is necessary insert the correct token, username and password, if the username or password was incorrect a exception is launched UserNotDeletedException, if all information was correct, the user receive a message informing the success about the operation. For delete a user, the endpoint is the same for findAll(), but is necessary change the method to **DELETE**.
 
+03/04/2025 -> Delete method for post was add, the user only can delete your OWN posts. This was the first time that i insert a method that receive two different parameters, the username and password and the post id.
+
 ## Endpoints
 
 * **User**
@@ -87,14 +89,18 @@ Some topics will be deleted or change during the process.
     * **findByEmail()** -> http://localhost:8080/users/emailsearch?text={user@email.com}
   * **DELETE**
     * **delete()** -> http://localhost:8080/users
+  * **UPDATE**
+    * **update()** -> http://localhost:8080/users
 
 * **Post**
   * **GET** 
-    * **findAll()** -> http://localhost:8080/users
-    * **findById()** -> http://localhost:8080/users/{id}
+    * **findAll()** -> http://localhost:8080/posts
+    * **findById()** -> http://localhost:8080/posts/{id}
     * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
   * **POST**
     * **insert()** -> http://localhost:8080/posts/insert
+    * **DELETE**
+      * **delete()** -> http://localhost:8080/posts
 
 * **Authentication**
   * **register()** -> http://localhost:8080/auth/register
