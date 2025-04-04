@@ -1,10 +1,9 @@
 package com.projectx.components;
 
-import com.projectx.dto.PostDTO;
-import com.projectx.dto.RegisterDTO;
-import com.projectx.dto.UserDTO;
+import com.projectx.dto.*;
 import com.projectx.entites.Post;
 import com.projectx.entites.User;
+import com.projectx.entites.UserFollow;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -17,8 +16,10 @@ public class ConvertDTO {
         Set<Long> postIds = user.getPosts().stream().map(Post::getId).collect(Collectors.toSet());
         Set<Long> followedIds =
                 user.getFollowing().stream().map(userFollow -> userFollow.getFollowed().getId()).collect(Collectors.toSet());
+        Set<Long> followingIds =
+                user.getFollowing().stream().map(userFollow -> userFollow.getFollowing().getId()).collect(Collectors.toSet());
 
-        return new UserDTO(user.getName(), user.getLname(), postIds, followedIds);
+        return new UserDTO(user.getName(), user.getLname(), postIds, followingIds, followedIds);
     }
 
     public RegisterDTO convertRegisterDTO(User user) {
@@ -32,5 +33,13 @@ public class ConvertDTO {
         Set<Long> rtIds =
                 post.getRT().stream().map(postRT -> postRT.getUserRT().getId()).collect(Collectors.toSet());
         return new PostDTO(post.getContent(), post.getOwner().getId(), likesIds, rtIds);
+    }
+
+    public FollowingResponseDTO convertUserFollowingDTO(Set<Long> followingIds) {
+        return new FollowingResponseDTO(followingIds);
+    }
+
+    public FollowedResponseDTO convertUserFollowedDTO(Set<Long> followedIds) {
+        return new FollowedResponseDTO(followedIds);
     }
 }

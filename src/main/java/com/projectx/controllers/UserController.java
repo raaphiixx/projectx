@@ -45,6 +45,18 @@ public class UserController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/{userId}/following")
+    public ResponseEntity<Set<Long>> getUserFollowing(@PathVariable("userId") Long userId) {
+        Set<Long> list = userService.getUserFollowing(userId);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/{userId}/followed")
+    public ResponseEntity<Set<Long>> getUserFollowed(@PathVariable("userId") Long userId) {
+        Set<Long> list = userService.getUserFollowed(userId);
+        return ResponseEntity.ok().body(list);
+    }
+
     @PostMapping
     public ResponseEntity update(@RequestBody UserDTO userDTO) throws BadRequestException {
         UserDTO userUpdate = userService.update(userDTO);

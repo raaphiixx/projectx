@@ -80,6 +80,8 @@ Some topics will be deleted or change during the process.
 
 03/04/2025 -> Delete method for post was add, the user only can delete your OWN posts. This was the first time that i insert a method that receive two different parameters, the username and password and the post id.
 
+04/04/2025 -> Now it is possible check information about following and followed users, two records was add to give a response for each method.
+
 ## Endpoints
 
 * **User**
@@ -87,6 +89,8 @@ Some topics will be deleted or change during the process.
     * **findAll()** -> http://localhost:8080/users
     * **findById()** -> http://localhost:8080/users/{id}
     * **findByEmail()** -> http://localhost:8080/users/emailsearch?text={user@email.com}
+    * **getFollowed()** -> http://localhost:8080/users/{userId}/followed
+    * **getFollowing()** -> http://localhost:8080/users/{userId}/following
   * **DELETE**
     * **delete()** -> http://localhost:8080/users
   * **UPDATE**
@@ -99,9 +103,10 @@ Some topics will be deleted or change during the process.
     * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
   * **POST**
     * **insert()** -> http://localhost:8080/posts/insert
-    * **DELETE**
+  * **DELETE**
       * **delete()** -> http://localhost:8080/posts
 
 * **Authentication**
-  * **register()** -> http://localhost:8080/auth/register
-  * **login()** -> http://localhost:8080/auth/login
+  * **POST**
+    * **register()** -> http://localhost:8080/auth/register
+    * **login()** -> http://localhost:8080/auth/login

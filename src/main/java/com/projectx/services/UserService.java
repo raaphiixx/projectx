@@ -7,6 +7,7 @@ import com.projectx.entites.User;
 import com.projectx.exceptions.UserNotAuthorizationException;
 import com.projectx.exceptions.UserNotDeletedException;
 import com.projectx.exceptions.UserNotFoundException;
+import com.projectx.repositories.UserFollowRepository;
 import com.projectx.repositories.UserRepository;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserFollowRepository userFollowRepository;
 
     @Autowired
     private ConvertDTO convertDTO;
@@ -47,6 +51,16 @@ public class UserService {
             throw new UserNotFoundException("Email not found!");
         }
         return result.stream().map(convertDTO::convertUserDTO).collect(Collectors.toSet());
+    }
+
+    public Set<Long> getUserFollowing(Long userId) {
+        UserDTO findUserId = findById(userId);
+        return findUserId.followingId();
+    }
+
+    public Set<Long> getUserFollowed(Long userId) {
+        UserDTO findUserId = findById(userId);
+        return findUserId.followedId();
     }
 
     public UserDTO update(UserDTO data) throws BadRequestException {
