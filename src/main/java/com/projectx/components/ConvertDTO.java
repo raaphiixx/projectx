@@ -3,7 +3,6 @@ package com.projectx.components;
 import com.projectx.dto.*;
 import com.projectx.entites.Post;
 import com.projectx.entites.User;
-import com.projectx.entites.UserFollow;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

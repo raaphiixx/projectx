@@ -82,6 +82,10 @@ Some topics will be deleted or change during the process.
 
 04/04/2025 -> Now it is possible check information about following and followed users, two records was add to give a response for each method.
 
+17/04/2025 -> Almost 2 weeks ago was the last update, it is a long time, but was necessary to studie a new implementation, new concecpts and more, but will not appy for now. In this time, was add **followUser()** method, a implementation used to one user can follow another one.
+
+18/04/2025 -> In this point, **unfollowUser()** was added, that method was more difficult then **followUser()**, and was a surprise for me, but after some research i found the solution and implemented.
+
 ## Endpoints
 
 * **User**
@@ -91,22 +95,34 @@ Some topics will be deleted or change during the process.
     * **findByEmail()** -> http://localhost:8080/users/emailsearch?text={user@email.com}
     * **getFollowed()** -> http://localhost:8080/users/{userId}/followed
     * **getFollowing()** -> http://localhost:8080/users/{userId}/following
+  
+  * **POST**
+    * **followUser()** -> http://localhost:8080/users/{userSourceId}/follow
+  
   * **DELETE**
     * **delete()** -> http://localhost:8080/users
+    * **unfollowUser()** -> http://localhost:8080/users/{userSourceId}/follow/{userTargetId}
+  
   * **UPDATE**
     * **update()** -> http://localhost:8080/users
 
+
 * **Post**
+  
   * **GET** 
     * **findAll()** -> http://localhost:8080/posts
     * **findById()** -> http://localhost:8080/posts/{id}
     * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
+  
   * **POST**
     * **insert()** -> http://localhost:8080/posts/insert
+  
   * **DELETE**
       * **delete()** -> http://localhost:8080/posts
 
+
 * **Authentication**
+  
   * **POST**
     * **register()** -> http://localhost:8080/auth/register
     * **login()** -> http://localhost:8080/auth/login

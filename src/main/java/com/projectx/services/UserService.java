@@ -4,6 +4,7 @@ import com.projectx.components.ConvertDTO;
 import com.projectx.dto.AuthenticationDTO;
 import com.projectx.dto.UserDTO;
 import com.projectx.entites.User;
+import com.projectx.entites.UserFollow;
 import com.projectx.exceptions.UserNotAuthorizationException;
 import com.projectx.exceptions.UserNotDeletedException;
 import com.projectx.exceptions.UserNotFoundException;
@@ -45,6 +46,10 @@ public class UserService {
         return convertDTO.convertUserDTO(result);
     }
 
+    public User findByIdEntity(Long id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    }
+
     public Set<UserDTO> findByEmail(String text) throws UserNotFoundException {
         Set<User> result = userRepository.findByEmailIgnoreCase(text);
         if(result.isEmpty()) {
@@ -75,7 +80,7 @@ public class UserService {
         return convertDTO.convertUserDTO(userUpdate);
     }
 
-    public Boolean delete(AuthenticationDTO data) throws UserNotDeletedException {
+    public Boolean deleteUser(AuthenticationDTO data) throws UserNotDeletedException {
 
         Boolean checkInfo = authenticationService.checkInfo(data);
 
@@ -89,6 +94,26 @@ public class UserService {
         } else {
             userRepository.delete(userDelete);
             return true;
+        }
+    }
+
+    public void followUser(Long userSource, Long userTarget) {
+        User u1 = findByIdEntity(userSource);
+        User u2 = findByIdEntity(userTarget);
+
+        UserFollow follow = new UserFollow(u1, u2);
+        userFollowRepository.save(follow);
+    }
+
+    public void unfollowUser(Long userSource, Long userTarget) {
+        User u1 = findByIdEntity(userSource);
+        User u2 = findByIdEntity(userTarget);
+        List<UserFollow> checkFollow = userFollowRepository.findByFollowedAndFollowing(u1, u2);
+
+        if(!checkFollow.isEmpty()) {
+            userFollowRepository.delete(checkFollow.get(0));
+        } else {
+            throw new RuntimeException("Follow not found!");
         }
     }
 

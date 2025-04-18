@@ -1,9 +1,7 @@
 package com.projectx.controllers;
 
 import com.projectx.components.URL;
-import com.projectx.dto.AuthenticationDTO;
-import com.projectx.dto.SuccessResponseDTO;
-import com.projectx.dto.UserDTO;
+import com.projectx.dto.*;
 import com.projectx.exceptions.UserNotDeletedException;
 import com.projectx.services.UserService;
 import org.apache.coyote.BadRequestException;
@@ -65,14 +63,33 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @PostMapping("/{userSourceId}/follow")
+    public ResponseEntity<Void> followUser(@PathVariable ("userSourceId") Long userSourceId,
+                                     @RequestBody UserFollowDTO userTargetId) {
+        userService.followUser(userSourceId, userTargetId.userIdTarget());
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping
-    public ResponseEntity delete(@RequestBody @Validated AuthenticationDTO data) throws UserNotDeletedException {
-        Boolean deleted = userService.delete(data);
+    public ResponseEntity deleteUser(@RequestBody @Validated AuthenticationDTO data) throws UserNotDeletedException {
+        Boolean deleted = userService.deleteUser(data);
         if(deleted) {
             SuccessResponseDTO message = new SuccessResponseDTO("User deleted successfully");
             return ResponseEntity.ok(message);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Delete Failed");
+        }
+    }
+
+    @DeleteMapping("/{userSourceId}/follow/{userTargetId}")
+    public ResponseEntity<String> unfollowUser(@PathVariable Long userSourceId,
+                                               @PathVariable Long userTargetId) {
+        try {
+            UserFollowDeleteDTO userDeleteDTO = new UserFollowDeleteDTO(userTargetId);
+            userService.unfollowUser(userTargetId, userSourceId);
+            return ResponseEntity.ok("User " + userSourceId + " unfollowed user " + userTargetId);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }
