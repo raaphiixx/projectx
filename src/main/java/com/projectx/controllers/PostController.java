@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "posts")
@@ -39,6 +40,12 @@ public class PostController {
         text = URL.decodeParam(text);
         List<PostDTO> list = postService.findByContentContaining(text);
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/{id}/likes")
+    public ResponseEntity<Set<Long>> getLikesPost(@PathVariable("id") Long id) {
+        Set<Long> result = postService.getLikesPost(id);
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping(value = "/insert")

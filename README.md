@@ -86,6 +86,8 @@ Some topics will be deleted or change during the process.
 
 18/04/2025 -> In this point, **unfollowUser()** was added, that method was more difficult then **followUser()**, and was a surprise for me, but after some research i found the solution and implemented.
 
+19/04/2025 -> Now it's possible to give a like to a post, using the method **likePost()**, and it's possible to remove a like inserting *UserId* and *PostId* using method **removeLikePost()**.
+
 ## Endpoints
 
 * **User**
@@ -98,10 +100,12 @@ Some topics will be deleted or change during the process.
   
   * **POST**
     * **followUser()** -> http://localhost:8080/users/{userSourceId}/follow
+    * **likePost()** -> http://localhost:8080/users/{userId}/like
   
   * **DELETE**
     * **delete()** -> http://localhost:8080/users
     * **unfollowUser()** -> http://localhost:8080/users/{userSourceId}/follow/{userTargetId}
+    * **removeLikePost()** -> http://localhost:8080/users/{userId}/like/{postId}
   
   * **UPDATE**
     * **update()** -> http://localhost:8080/users
@@ -113,6 +117,7 @@ Some topics will be deleted or change during the process.
     * **findAll()** -> http://localhost:8080/posts
     * **findById()** -> http://localhost:8080/posts/{id}
     * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
+    * **getLikesPost()** -> http://localhost:8080/posts/{id}/likes
   
   * **POST**
     * **insert()** -> http://localhost:8080/posts/insert

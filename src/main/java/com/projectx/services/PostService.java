@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -41,12 +42,21 @@ public class PostService {
         return convertDTO.convertPostDTO(result);
     }
 
+    public Post findPostByEntity(Long id) throws PostNotFoundException {
+        return postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+    }
+
     public List<PostDTO> findByContentContaining(String text) throws PostNotFoundException {
         List<Post> result = postRepository.findByContentContainingIgnoreCase(text);
         if(result.isEmpty()) {
             throw new PostNotFoundException("Content not found!");
         }
         return result.stream().map(convertDTO::convertPostDTO).collect(Collectors.toList());
+    }
+
+    public Set<Long> getLikesPost(Long postId) {
+        PostDTO findPostId = findById(postId);
+        return findPostId.likes();
     }
 
     public PostDTO insert(PostDTO postDTO) throws PostNotCreatedException {
@@ -76,7 +86,6 @@ public class PostService {
             throw new UserNotFoundException();
         }
         postRepository.delete(postSearch);
-
         return true;
     }
 }

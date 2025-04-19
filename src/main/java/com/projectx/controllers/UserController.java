@@ -70,6 +70,14 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{userId}/like")
+    public ResponseEntity<Void> postLike(@PathVariable ("userId") Long userId,
+                                         @RequestBody PostLikeDTO postId) {
+        PostLikeDTO likeDTO = new PostLikeDTO(userId, postId.postId());
+        userService.likePost(likeDTO);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping
     public ResponseEntity deleteUser(@RequestBody @Validated AuthenticationDTO data) throws UserNotDeletedException {
         Boolean deleted = userService.deleteUser(data);
@@ -92,4 +100,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @DeleteMapping("{userId}/like/{postId}")
+    public ResponseEntity<String> removeLikePost(@PathVariable Long userId,
+                                               @PathVariable Long postId) {
+        try {
+            PostRemoveLikeDTO postRemoveLikeDTO = new PostRemoveLikeDTO(postId);
+            userService.removeLikePost(userId, postId);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }

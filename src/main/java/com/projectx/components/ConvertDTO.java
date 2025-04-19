@@ -2,6 +2,7 @@ package com.projectx.components;
 
 import com.projectx.dto.*;
 import com.projectx.entites.Post;
+import com.projectx.entites.PostLike;
 import com.projectx.entites.User;
 import org.springframework.stereotype.Component;
 
@@ -34,11 +35,7 @@ public class ConvertDTO {
         return new PostDTO(post.getContent(), post.getOwner().getId(), likesIds, rtIds);
     }
 
-    public FollowingResponseDTO convertUserFollowingDTO(Set<Long> followingIds) {
-        return new FollowingResponseDTO(followingIds);
-    }
-
-    public FollowedResponseDTO convertUserFollowedDTO(Set<Long> followedIds) {
-        return new FollowedResponseDTO(followedIds);
+    public PostLikeDTO convertPostLikeDTO(PostLike postLike) {
+        return new PostLikeDTO(postLike.getUser().getId(), postLike.getPost().getId());
     }
 }
