@@ -144,7 +144,7 @@ public class UserService {
         }
     }
 
-    public void removeLikePost(Long userId, Long postId) {
+    public void unlikePost(Long userId, Long postId) {
         User u1 = findUserByEntity(userId);
         Post p1 = postService.findPostByEntity(postId);
         List<PostLike> checkLike = postLikeRepository.findByUserAndPost(u1, p1);

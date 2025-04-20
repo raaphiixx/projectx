@@ -1,8 +1,7 @@
 # Project X
 
 This project was created to implement and test some knowledge about caching, this isn't the first time that i start 
-this project, but this time i challenged myself to commit each step, so every will be new every week. I know this 
-text there are some orthography errors because english isn't my mother language, so that will be another challenger too.
+this project, but this time i challenged myself to commit each step. I know this description have some orthography errors because english isn't my mother language, so that will be another challenger too.
 
 ## Time to explain what is the project...
 The X or Twitter is a social media that used by million of people round the world, and there are some functions that 
@@ -36,24 +35,12 @@ Some topics will be deleted or change during the process.
 4- Liking and unliking tweets:
 
 * Like a tweet: POST /users/{userId}/likes
-* Get user' liked tweets: GET /users/{userId}/likes
 * Get tweet's liking users: GET /tweets/{tweetId}/likes
 * Unlike a tweet: DELETE /users/{userId}/likes/{tweetId}
 
-5- Retweeting and undoing retweets:
-
-* Retweet a tweet: POST /users/{userId}/retweets
-* Get tweet's retweets: GET /tweets/{tweetId}/retweeters
-* Undo a retweet: DELETE /users/{userId}/retweets/{tweetId}
-
-6- View Home Timeline and User Timeline.
-
-* Get a single user's Home timeline: Get /users/{userId}/timelines/home
-* Get a single user's Tweet timeline: Get /users/{userId}/timelines/tweet
-
 ### UML Project:
 
-![Diagram User - Post](medias/diagram_2.png)
+![Diagram User - Post](medias/diagram_3.png)
 
 
 ## Project details:
@@ -88,6 +75,8 @@ Some topics will be deleted or change during the process.
 
 19/04/2025 -> Now it's possible to give a like to a post, using the method **likePost()**, and it's possible to remove a like inserting *UserId* and *PostId* using method **removeLikePost()**.
 
+20/04/2025 -> At this point, RT was delete because isn't necessary for this project, some DTOs was also delete. The next step will be create a script to remove *TestConfiguration* file.
+
 ## Endpoints
 
 * **User**
@@ -115,7 +104,7 @@ Some topics will be deleted or change during the process.
   
   * **GET** 
     * **findAll()** -> http://localhost:8080/posts
-    * **findById()** -> http://localhost:8080/posts/{id}
+    * **findById()** -> http://localhost:8080/posts/{id}TestConfiguration
     * **findbyContent** -> http://localhost:8080/posts/contentsearch?text={part of text}
     * **getLikesPost()** -> http://localhost:8080/posts/{id}/likes
   

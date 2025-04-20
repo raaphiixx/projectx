@@ -106,7 +106,7 @@ public class UserController {
                                                @PathVariable Long postId) {
         try {
             PostRemoveLikeDTO postRemoveLikeDTO = new PostRemoveLikeDTO(postId);
-            userService.removeLikePost(userId, postId);
+            userService.unlikePost(userId, postId);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

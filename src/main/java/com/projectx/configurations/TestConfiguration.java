@@ -1,7 +1,13 @@
 package com.projectx.configurations;
 
-import com.projectx.entites.*;
-import com.projectx.repositories.*;
+import com.projectx.entites.Post;
+import com.projectx.entites.PostLike;
+import com.projectx.entites.User;
+import com.projectx.entites.UserFollow;
+import com.projectx.repositories.PostLikeRepository;
+import com.projectx.repositories.PostRepository;
+import com.projectx.repositories.UserFollowRepository;
+import com.projectx.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +28,6 @@ public class TestConfiguration implements CommandLineRunner {
 
     @Autowired
     private UserFollowRepository userFollowRepository;
-
-    @Autowired
-    private PostRTRepository postRTRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -69,13 +72,5 @@ public class TestConfiguration implements CommandLineRunner {
         UserFollow uf4 = new UserFollow(u4, u1);
 
         userFollowRepository.saveAll(Arrays.asList(uf1, uf2, uf3, uf4));
-
-        PostRT pt1 = new PostRT(p1, u2);
-        PostRT pt2 = new PostRT(p1, u4);
-        PostRT pt3 = new PostRT(p3, u4);
-        PostRT pt4 = new PostRT(p3, u1);
-
-        postRTRepository.saveAll(Arrays.asList(pt1, pt2, pt3, pt4));
-
     }
 }

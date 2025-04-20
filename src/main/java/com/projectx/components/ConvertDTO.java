@@ -30,9 +30,7 @@ public class ConvertDTO {
     public PostDTO convertPostDTO(Post post) {
         Set<Long> likesIds =
                 post.getLikes().stream().map(postLike -> postLike.getUser().getId()).collect(Collectors.toSet());
-        Set<Long> rtIds =
-                post.getRT().stream().map(postRT -> postRT.getUserRT().getId()).collect(Collectors.toSet());
-        return new PostDTO(post.getContent(), post.getOwner().getId(), likesIds, rtIds);
+        return new PostDTO(post.getContent(), post.getOwner().getId(), likesIds);
     }
 
     public PostLikeDTO convertPostLikeDTO(PostLike postLike) {
