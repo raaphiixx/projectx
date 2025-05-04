@@ -77,6 +77,8 @@ Some topics will be deleted or change during the process.
 
 20/04/2025 -> At this point, RT was delete because isn't necessary for this project, some DTOs was also delete. The next step will be create a script to remove *TestConfiguration* file.
 
+04/05/2025 -> Time to populate the Database and change H2 database to PostgreSQL, now our database has 1000 USERS and 10000 POSTS, each user follow 4 another users and each post has 5 likes, the Random library was use to make more natural the Database.
+
 ## Endpoints
 
 * **User**
