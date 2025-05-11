@@ -2,7 +2,7 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=redis2'
+      - 'POSTGRES_DB=projectx'
       - 'POSTGRES_PASSWORD=123'
       - 'POSTGRES_USER=postgres'
     ports:

@@ -79,6 +79,8 @@ Some topics will be deleted or change during the process.
 
 04/05/2025 -> Time to populate the Database and change H2 database to PostgreSQL, now our database has 1000 USERS and 10000 POSTS, each user follow 4 another users and each post has 5 likes, the Random library was use to make more natural the Database.
 
+11/05/2025 -> After few days with some issue using docker, the new version is ready, now isn't necessary pull the entire project to test, there is a new file called **"compose.dev.yml"** and this compose have an image called **"raaphiixx/projectx:1.0"** necessary to run the project. A old file was rename **"compose.yml"** to **"compose.local.yml"**.
+
 ## Endpoints
 
 * **User**
