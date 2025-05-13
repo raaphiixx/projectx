@@ -81,6 +81,8 @@ Some topics will be deleted or change during the process.
 
 11/05/2025 -> After few days with some issue using docker, the new version is ready, now isn't necessary pull the entire project to test, there is a new file called **"compose.dev.yml"** and this compose have an image called **"raaphiixx/projectx:1.0"** necessary to run the project. A old file was rename **"compose.yml"** to **"compose.local.yml"**.
 
+13/05/2025 -> Another change, now **compose.dev.yml** has a "custom" postgres image that has the data dump, so, when the compose run all data(that has more users, posts and more) is ready to test.
+
 ## Endpoints
 
 * **User**

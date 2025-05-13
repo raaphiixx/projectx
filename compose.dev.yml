@@ -17,7 +17,7 @@ services:
       - projectxNet
 
   db:
-    image: postgres:latest
+    image: raaphiixx/projectx-db:1.0
     container_name: postgres-db
     environment:
       POSTGRES_USER: postgres
