@@ -1,4 +1,6 @@
 package com.projectx.dto;
 
-public record PostLikeDTO(Long userId, Long postId) {
+import java.io.Serializable;
+
+public record PostLikeDTO(Long userId, Long postId) implements Serializable {
 }

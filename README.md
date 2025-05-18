@@ -83,6 +83,14 @@ Some topics will be deleted or change during the process.
 
 13/05/2025 -> Another change, now **compose.dev.yml** has a "custom" postgres image that has the data dump, so, when the compose run all data(that has more users, posts and more) is ready to test.
 
+18/05/2025 -> Project finished, the last part was to add the Redis dependency to manage the cache and insert it into the **"compose.dev.yml"** file. Redis was giving me problems for a few days, and I didn't understand why. Every time I tried to check all users or posts, it returned 401. After researching and trying several things, I found the problem and solved it. SOLVE THAT PROBLEM WAS AWESOME
+
+
+This project was very important to better understand how DOCKER works, how to create compose files, why this tool is so powerful and also why caching is so necessary and how I can use it. Some knowledge was reviewed and improved, such as Spring Security, JWT and others.
+
+I know this project takes a long time to complete, and this was important to me because I understood that if you can do more in a day, just do it. Some days you won't be able to do even what you were supposed to do and some features can confuse you and make you waste days trying to solve them.
+
+
 ## Endpoints
 
 * **User**

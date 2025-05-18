@@ -15,6 +15,7 @@ import com.projectx.repositories.UserFollowRepository;
 import com.projectx.repositories.UserRepository;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,6 +50,7 @@ public class UserService {
     private AuthenticationService authenticationService;
 
 
+    @Cacheable("users")
     public List<UserDTO> findAll() {
         return userRepository.findAll().stream().map(convertDTO::convertUserDTO).collect(Collectors.toList());
     }

@@ -1,4 +1,6 @@
 package com.projectx.dto;
 
-public record UserFollowDeleteDTO(Long followedUserId) {
+import java.io.Serializable;
+
+public record UserFollowDeleteDTO(Long followedUserId) implements Serializable {
 }

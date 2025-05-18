@@ -11,6 +11,7 @@ import com.projectx.exceptions.UserNotFoundException;
 import com.projectx.repositories.PostRepository;
 import com.projectx.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class PostService {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @Cacheable("posts")
     public List<PostDTO> findAll() {
         return postRepository.findAll().stream().map(convertDTO::convertPostDTO).collect(Collectors.toList());
     }
